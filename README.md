@@ -1,5 +1,5 @@
 # Covid DataSet Spain
-Dataset of covid data in Spain by CCAA, which includes the followings columns:
+Dataset of covid data in Spain by CCAA from March 17, 2020 to March 5, 2021, which includes the followings columns:
 
   -Comunidad: CCAA of Spain
   
