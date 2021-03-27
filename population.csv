@@ -1,4 +1,4 @@
-LocID,Location,VarID,Variant,Time,MidPeriod,PopMale,PopFemale,PopTotal,PopDensity
+LocID,Country,VarID,Variant,Time,MidPeriod,PopMale,PopFemale,PopTotal,PopDensity
 4,Afghanistan,2,Medium,2019,2019.5,19529727,1851203,38041757,58.269
 903,Africa,2,Medium,2019,2019.5,65351368,654550496,1308064176,44.119
 1823,African Group,2,Medium,2019,2019.5,652644714,653675858,1306320572,44.464
