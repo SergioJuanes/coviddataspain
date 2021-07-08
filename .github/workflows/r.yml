@@ -3,8 +3,8 @@ name: R
 
 # Controls when the action will run.
 on:
-  push:
-    branches: main
+  schedule:
+  - cron: '0 2 * * *'
 
 jobs: 
   autoscrape:
