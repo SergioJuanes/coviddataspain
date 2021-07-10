@@ -1,4 +1,7 @@
 library(tidyverse)
+library(textclean)
+library(pdftools)
+library(miscTools)
 
 whodata <- read_csv(url("https://covid19.who.int/WHO-COVID-19-global-data.csv"))
 whodata$Country_code <- as.character(whodata$Country_code)
@@ -62,8 +65,6 @@ if(!is.null(pdf_file)){
   }
   names(datos_comunidades) <- c("Comunidad", "Total", "diaprevio", "casos14dias", "IA14", "casos7dias", "IA7", "NI1", "NI2", "NI3", "NI4")
   
-  print(i)
-  print(fecha)
   datos_comunidades <- data.frame(lapply(datos_comunidades, as.character), stringsAsFactors=FALSE)
   datos_comunidades$Fecha <- fecha
   datos_comunidades$Comunidad <- c("Andalucía", "Aragón", "Principado de Asturias", "Islas Baleares", "Islas Canarias", "Cantabria", "Castilla-La Mancha", "Castilla y León", "Cataluña", "Ceuta", "Comunidad Valenciana", "Extremadura", "Galicia", "Comunidad de Madrid", "Melilla", "Región de Murcia", "Comunidad Foral de Navarra", "País Vasco", "La Rioja", "España")
