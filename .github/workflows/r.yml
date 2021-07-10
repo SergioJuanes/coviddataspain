@@ -4,7 +4,7 @@ name: R
 # Controls when the action will run.
 on:
   schedule:
-  - cron: '05 16 * * *'
+  - cron: '40 16 * * *'
 
 jobs: 
   autoscrape:
@@ -23,6 +23,7 @@ jobs:
         R -e 'install.packages("textclean", dependencies=TRUE)'
         R -e 'install.packages("pdftools", dependencies=TRUE)'
         R -e 'install.packages("miscTools", dependencies=TRUE)'
+        R -e 'install.packages("parsedate", dependencies=TRUE)'
     
     # Run R script
     - name: Scrape
