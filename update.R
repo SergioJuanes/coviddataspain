@@ -9,6 +9,7 @@ whodata$Country_code <- as.character(whodata$Country_code)
 whodata$New_cases <- as.double(whodata$New_cases)
 
 #cambio de nombres
+
 cambio_nombres <- function(df){
   #dataframe con columna Country
   
@@ -43,6 +44,7 @@ cambio_nombres <- function(df){
 whodata <- na.omit(whodata)
 
 whodata <- cambio_nombres(whodata)
+
 
 
 write_csv(whodata, "data/whodata.csv")
@@ -141,6 +143,8 @@ if(!is.null(pdf_file)){
   write_csv(spain_covid, "data/spain_covid_dataset.csv")
 }
                                         
+                                        
+                                        
 fecha <- Sys.Date() 
 pdf_file <- tryCatch(
   pdf_text(paste0("https://www.mscbs.gob.es/profesionales/saludPublica/ccayes/alertasActual/nCov/documentos/Informe_GIV_comunicacion_", str_replace_all(as.Date(fecha), "-", ""), ".pdf")),
@@ -180,3 +184,49 @@ if (!is.null(pdf_file)){
   write_csv(spain_vac, "data/vacspain.csv")
 }
 
+                                        
+                                        
+                                     
+
+uci_covid_spain <- read_csv("data/ucispain.csv")
+number_file <- max(uci_covid_spain$number_file) + 1
+pdf_file <- tryCatch(
+  pdf_text(paste0("https://www.mscbs.gob.es/profesionales/saludPublica/ccayes/alertasActual/nCov/documentos/Actualizacion_",
+                   number_file,"_COVID-19.pdf", 
+                   collapse = "")),
+  error=function(e) NULL
+)
+if(!is.null(pdf_file)){
+  datos_unlist <- unlist(str_split(pdf_file[3], "[\\r\\n]+"))
+  #datos_unlist <- gsub("Mancha", "Mancha ", datos_unlist)
+  datos_unlist <- data.frame(str_split_fixed(str_trim(datos_unlist), "\\s{2,}", 9))
+  datos_comunidades <- data.frame(apply(datos_unlist, 2, function(x) gsub("^$", NA, trimws(x))), stringsAsFactors = FALSE)
+  datos_comunidades <- datos_comunidades %>% filter(complete.cases(datos_comunidades))
+  #datos_comunidades <- datos_comunidades[-which(datos_comunidades$X1 == "CCAA"),]
+  names(datos_comunidades) <- c("CCAA", "Total_Ingresados", "Tasa_hosp", "PercCamasCovid", "UCI", "Tasa_UCI", "PerCamasUCI", "Ingresos24h", "Altas24h")
+  datos_comunidades$CCAA <- c("Andalucía", "Aragón", "Principado de Asturias", "Islas Baleares", "Islas Canarias", "Cantabria", "Castilla-La Mancha", "Castilla y León" , "Cataluña", "Ceuta", "Comunidad Valenciana", "Extremadura", "Galicia", "Comunidad de Madrid", "Melilla", "Región de Murcia", "Comunidad Foral de Navarra", "País Vasco", "La Rioja", "España")
+
+  fecha <- as.Date(format(parsedate::parse_date(unlist(str_split(pdf_file[1], "[\\r\\n]+"))[5]), "%Y-%m-%d"))
+  if(is.na(fecha)){
+    fecha <-as.Date(format(parsedate::parse_date(unlist(str_split(pdf_file[1], "[\\r\\n]+"))[6]), "%Y-%m-%d"))
+  }
+
+  datos_comunidades$fecha <- fecha
+  
+  uci_covid_ultimos <- datos_comunidades
+  
+  uci_covid_ultimos$PercCamasCovid <- sub("%", "", uci_covid_ultimos$PercCamasCovid)
+  uci_covid_ultimos$PercCamasCovid <- sub(",", "\\.", uci_covid_ultimos$PercCamasCovid)
+  uci_covid_ultimos$PerCamasUCI <- sub("%", "", uci_covid_ultimos$PerCamasUCI)
+  uci_covid_ultimos$PerCamasUCI <- sub(",", "\\.", uci_covid_ultimos$PerCamasUCI)
+  uci_covid_ultimos[2:7] <- data.frame(lapply(uci_covid_ultimos[2:7], as.numeric))
+  uci_covid_ultimos$Total_Ingresados <- str_replace_all(uci_covid_ultimos$Total_Ingresados, ".000", "")
+  uci_covid_ultimos$Total_Ingresados <- str_replace_all(uci_covid_ultimos$Total_Ingresados, "\\.", "")
+  
+  uci_covid_ultimos <- uci_covid_ultimos %>% dplyr::select(-c(Tasa_hosp, Tasa_UCI))
+  uci_covid_ultimos$number_file <- number_file
+  
+  uci_covid_spain <- rbind(uci_covid_spain, uci_covid_ultimos)
+  write_csv(uci_covid_spain, "data/ucispain.csv")
+  
+}
