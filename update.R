@@ -2,6 +2,7 @@ library(tidyverse)
 library(textclean)
 library(pdftools)
 library(miscTools)
+library(parsedate)
 
 whodata <- read_csv(url("https://covid19.who.int/WHO-COVID-19-global-data.csv"))
 whodata$Country_code <- as.character(whodata$Country_code)
