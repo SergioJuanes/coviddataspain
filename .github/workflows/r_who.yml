@@ -4,7 +4,7 @@ name: R
 # Controls when the action will run.
 on:
   schedule:
-  - cron: '0 * * * *'
+  - cron: '17 * * * *'
 
 jobs: 
   autoscrape:
