@@ -41,4 +41,6 @@ whodata <- na.omit(whodata)
 
 whodata <- cambio_nombres(whodata)
 
+print(max(whodata$Date_reported))
+
 write_csv(whodata, "data/whodata.csv")
