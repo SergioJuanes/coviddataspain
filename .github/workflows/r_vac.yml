@@ -4,7 +4,7 @@ name: R
 # Controls when the action will run.
 on:
   schedule:
-  - cron: '20 18 * * *'
+  - cron: '40 18 * * *'
 
 jobs: 
   autoscrape:
@@ -39,15 +39,3 @@ jobs:
       env:
         REPO_KEY: ${{secrets.GITHUB_TOKEN}}
         username: github-actions
-© 2021 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
