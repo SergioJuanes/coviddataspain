@@ -1,5 +1,5 @@
 # Hourly scraping
-name: R
+name: R_who
 
 # Controls when the action will run.
 on:
