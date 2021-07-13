@@ -1,10 +1,10 @@
 # Hourly scraping
-name: R
+name: R_spain
 
 # Controls when the action will run.
 on:
   schedule:
-  - cron: '0 18 * * *'
+  - cron: '50 6 * * *'
 
 jobs: 
   autoscrape:
