@@ -1,5 +1,5 @@
 # Hourly scraping
-name: R
+name: R_spain_vac
 
 # Controls when the action will run.
 on:
