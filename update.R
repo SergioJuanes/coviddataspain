@@ -80,6 +80,7 @@ if(!is.null(pdf_file)){
   
   spain_covid_nuevos$Casos <- as.numeric(gsub("\\.", "", spain_covid_nuevos$Casos))
   spain_covid_nuevos$Fallecidos <- as.numeric(gsub("\\.", "", spain_covid_nuevos$Fallecidos))
+  spain_covid_nuevos$IA14 <- gsub("\\.", "", spain_covid_nuevos$IA14)
   spain_covid_nuevos$IA14 <- as.numeric(gsub(",", ".", spain_covid_nuevos$IA14))
   
   spain_covid_nuevos$number_file <- number_file
