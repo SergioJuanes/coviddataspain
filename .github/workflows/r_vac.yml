@@ -4,7 +4,7 @@ name: R_spain_vac
 # Controls when the action will run.
 on:
   schedule:
-  - cron: '40 18 * * *'
+  - cron: '50 18 * * *'
 
 jobs: 
   autoscrape:
