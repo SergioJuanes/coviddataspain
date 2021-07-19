@@ -4,7 +4,7 @@ name: R_who
 # Controls when the action will run.
 on:
   schedule:
-  - cron: '* 1,13 * * *'
+  - cron: '50 1,13 * * *'
 
 jobs: 
   autoscrape:
