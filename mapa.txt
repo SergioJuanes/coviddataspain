@@ -1,0 +1,7 @@
+credits: {
+        text: '',
+            mapText: '<a href="https://ec.europa.eu/eurostat">Fuente: Eurostat</a>',
+            style: {
+                fontSize: '11px'
+            }
+        }
