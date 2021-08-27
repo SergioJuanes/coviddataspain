@@ -4,11 +4,20 @@ library(pdftools)
 library(miscTools)
 library(parsedate)
 
-fecha <- Sys.Date() 
+spain_vac <- read.csv(get_path("vacspain.csv"), stringsAsFactors = FALSE)
+
+fecha <- as.Date(max(unique(spain_vac$fecha))) + 1
 pdf_file <- tryCatch(
-  pdf_text(paste0("https://www.mscbs.gob.es/profesionales/saludPublica/ccayes/alertasActual/nCov/documentos/Informe_GIV_comunicacion_", str_replace_all(as.Date(fecha), "-", ""), ".pdf")),
+  pdf_text(paste0("https://www.mscbs.gob.es/profesionales/saludPublica/ccayes/alertasActual/nCov/documentos/Informe_GIV_comunicacion_", str_replace_all(fecha, "-", ""), ".pdf")),
   error=function(e) NULL
 )
+if (is.null(pdf_file)){
+  fecha <- as.Date(Sys.Date())
+  pdf_file <- tryCatch(
+    pdf_text(paste0("https://www.mscbs.gob.es/profesionales/saludPublica/ccayes/alertasActual/nCov/documentos/Informe_GIV_comunicacion_", str_replace_all(fecha, "-", ""), ".pdf")),
+    error=function(e) NULL
+  )
+}
 if (!is.null(pdf_file)){
   datos_unlist <- unlist(str_split(pdf_file[3], "[\\r\\n]+"))
   datos_unlist <- data.frame(str_split_fixed(str_trim(datos_unlist), "\\s{2,}", 11))
@@ -36,7 +45,7 @@ if (!is.null(pdf_file)){
   vacunacion <- left_join(vacunacion, pobcoms, by = "Comunidad")
   vacunacion$percvacunados <- round(100*vacunacion$Personas2Dosis/vacunacion$Poblacion, 2)
   
-  spain_vac <- read.csv("data/vacspain.csv", stringsAsFactors = FALSE, encoding = "UTF-8")
+  #spain_vac <- read.csv("data/vacspain.csv", stringsAsFactors = FALSE, encoding = "UTF-8")
   spain_vac$fecha <- as.Date(spain_vac$fecha)
   spain_vac <- rbind(spain_vac, vacunacion)
   
