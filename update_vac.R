@@ -4,7 +4,7 @@ library(pdftools)
 library(miscTools)
 library(parsedate)
 
-spain_vac <- read.csv(get_path("vacspain.csv"), stringsAsFactors = FALSE)
+spain_vac <- spain_vac <- read.csv("data/vacspain.csv", stringsAsFactors = FALSE, encoding = "UTF-8")
 
 fecha <- as.Date(max(unique(spain_vac$fecha))) + 1
 pdf_file <- tryCatch(
