@@ -1,18 +1,6 @@
 # Covid DataSet Spain
-Dataset of covid data in Spain by CCAA from March 17, 2020 to March 5, 2021, which includes the followings columns:
+Conjunto de datos sobre la pandemia por el COVID-19 en España, segmentada por comunidades autónomas. Los datos son actualizables automáticamente a través de la herramienta GitHub Actions. Para ello, se conecta al PDF que el Gobierno español publica diariamente (excepto fines de semana y festivos), y realiza un proceso de limpieza y tratamiento de la información (scripts update.R para los casos, fallecidos, incidencia acumulada y hospitalización y update_vac.R para el ritmo de vacunación). Además, se descargan los datos correspondientes a la OMS para todos los países del mundo dos veces al día (update_who.R).
 
-  -Comunidad: CCAA of Spain
-  
-  -Fecha: The date of the value
-  
-  -Casos: The total amount of covid cases registered until that date
-  
-  -IA14: The cumulative incidence of the last 14 days
-  
-  -Fallecidos: The total amount of covid deaths registered until that date
-  
-  
-The dataset was get from the daily pdf that the Government of Spain generates every day(https://www.mscbs.gob.es/profesionales/saludPublica/ccayes/alertasActual/nCov/documentos/Actualizacion_283_COVID-19.pdf), and some weekends they don't publish any pdf so maybe some date are missing.
+Los ficheros se encuentran, junto a otros ficheros que pueden ser útiles para la realización de calculos o de gráficas, en la carpeta data. 
 
-The values may be inconsistent (i.e. the amount of deaths goes down) because the updates that the Government of Spain made in the start of the Covid-19 pandemic.
-
+Los datos de España pueden ser inconsistentes en ciertos puntos (el número de casos o muertes diario resulta negativo) debido a reajustes que los gobiernos autonómicos han realizado a lo largo de la pandemia.
