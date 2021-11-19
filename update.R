@@ -21,6 +21,14 @@ if(!is.null(pdf_file)){
   if (is.na(fecha)) {
     fecha <- as.Date(format(parsedate::parse_date(datos_unlist[[1]][6]), "%Y-%m-%d"))
   }
+  
+  if (fecha == max(spain_covid$Fecha)) {
+    #if (as.POSIXlt(fecha)$wday == 5) {
+    #  fecha = fecha + 3
+    #} else {
+      fecha = fecha + 1
+    #}
+  }
   names(datos_comunidades) <- c("Comunidad", "Total", "diaprevio", "casos14dias", "IA14", "casos7dias", "IA7", "NI1", "NI2", "NI3", "NI4")
   
   datos_comunidades <- data.frame(lapply(datos_comunidades, as.character), stringsAsFactors=FALSE)
@@ -122,6 +130,7 @@ if(!is.null(pdf_file)){
   if(is.na(fecha)){
     fecha <-as.Date(format(parsedate::parse_date(unlist(str_split(pdf_file[1], "[\\r\\n]+"))[6]), "%Y-%m-%d"))
   }
+                                       
 
   datos_comunidades$fecha <- fecha
   
