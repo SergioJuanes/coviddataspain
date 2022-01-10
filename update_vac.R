@@ -20,9 +20,12 @@ if (is.null(pdf_file)){
 }
 if (!is.null(pdf_file)){
   datos_unlist <- unlist(str_split(pdf_file[3], "[\\r\\n]+"))
-  datos_unlist <- data.frame(str_split_fixed(str_trim(datos_unlist), "\\s{2,}", 11))
+  datos_unlist <- data.frame(str_split_fixed(str_trim(datos_unlist), "\\s{2,}", 14))
   datos_comunidades <- data.frame(apply(datos_unlist, 2, function(x) gsub("^$", NA, trimws(x))))
-  datos_comunidades$X11 <- NULL
+  datos_comunidades$X3 <- NULL
+  datos_comunidades$X12 <- NULL
+  datos_comunidades$X13 <- NULL
+  datos_comunidades$X14 <- NULL
   datos_comunidades <- datos_comunidades %>% filter(complete.cases(datos_comunidades))
   names(datos_comunidades) <- c("Comunidad", "Pfizer", "Moderna", "AstraZeneca", "Janssen", "Entregadas", "Administradas", "PercAdministradas", "Personas1Dosis", "Personas2Dosis")
   
