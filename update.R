@@ -30,6 +30,7 @@ if(!is.null(pdf_file)){
       fecha = fecha + 1
     #}
   }
+  print(datos_comunidades)
   names(datos_comunidades) <- c("Comunidad", "Total", "diaprevio", "casos14dias", "IA14", "casos7dias", "IA7", "Fallecidos", "ultimos7", "letalidad")
   print(datos_comunidades)
   datos_comunidades <- data.frame(lapply(datos_comunidades, as.character), stringsAsFactors=FALSE)
