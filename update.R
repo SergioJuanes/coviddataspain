@@ -30,9 +30,10 @@ if(!is.null(pdf_file)){
     #}
   }
   names(datos_comunidades) <- c("Comunidad", "Total", "diaprevio", "casos14dias", "IA14", "casos7dias", "IA7", "Fallecidos", "ultimos7", "letalidad")
-  
+  print(datos_comunidades)
   datos_comunidades <- data.frame(lapply(datos_comunidades, as.character), stringsAsFactors=FALSE)
   datos_comunidades$Fecha <- fecha
+  print(datos_comunidades)
   datos_comunidades$Comunidad <- c("Andalucía", "Aragón", "Principado de Asturias", "Islas Baleares", "Islas Canarias", "Cantabria", "Castilla-La Mancha", "Castilla y León", "Cataluña", "Ceuta", "Comunidad Valenciana", "Extremadura", "Galicia", "Comunidad de Madrid", "Melilla", "Región de Murcia", "Comunidad Foral de Navarra", "País Vasco", "La Rioja", "España")
   
   datos_comunidades <- datos_comunidades %>% select(Comunidad, Total, IA14, Fecha, Fallecidos)
