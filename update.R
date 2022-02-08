@@ -4,7 +4,7 @@ library(pdftools)
 library(miscTools)
 library(parsedate)
 
-spain_covid <- read_csv("data/spaincoviddata.csv")
+spain_covid <- read_csv("data/spain_covid_dataset.csv")
 number_file <- max(spain_covid$number_file) + 1
 pdf_file <- tryCatch(
   pdf_text(paste0("https://www.mscbs.gob.es/profesionales/saludPublica/ccayes/alertasActual/nCov/documentos/Actualizacion_",
