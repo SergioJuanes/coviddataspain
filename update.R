@@ -83,7 +83,7 @@ pdf_file <- tryCatch(
   error=function(e) NULL
 )
 if(!is.null(pdf_file)){
-  datos_unlist <- unlist(str_split(pdf_file[3], "[\\r\\n]+"))
+  datos_unlist <- unlist(str_split(pdf_file[4], "[\\r\\n]+"))
   #datos_unlist <- gsub("Mancha", "Mancha ", datos_unlist)
   datos_unlist <- data.frame(str_split_fixed(str_trim(datos_unlist), "\\s{2,}", 9))
   datos_comunidades <- data.frame(apply(datos_unlist, 2, function(x) gsub("^$", NA, trimws(x))), stringsAsFactors = FALSE)
