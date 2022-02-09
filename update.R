@@ -38,9 +38,10 @@ if(!is.null(pdf_file)){
                                         
   datos_comunidades <- data.frame(lapply(datos_comunidades, as.character), stringsAsFactors=FALSE)
   datos_comunidades$Fecha <- fecha
+  print(nrow(datos_comunidades))
   print(datos_comunidades)
   datos_comunidades$Comunidad <- c("Andalucía", "Aragón", "Principado de Asturias", "Islas Baleares", "Islas Canarias", "Cantabria", "Castilla-La Mancha", "Castilla y León", "Cataluña", "Ceuta", "Comunidad Valenciana", "Extremadura", "Galicia", "Comunidad de Madrid", "Melilla", "Región de Murcia", "Comunidad Foral de Navarra", "País Vasco", "La Rioja", "España")
-  
+  print("aquí pasa 1")
 
   spain_covid_nuevos <- datos_comunidades
   
@@ -54,11 +55,13 @@ if(!is.null(pdf_file)){
   spain_covid_nuevos$IA14 <- as.numeric(gsub(",", ".", spain_covid_nuevos$IA14))
   
   spain_covid_nuevos$number_file <- number_file
+  print("aquí pasa 2")
   
   spain_covid <- rbind(spain_covid, spain_covid_nuevos)
   
   spain_covid <- spain_covid %>% dplyr::arrange(Fecha, Comunidad)
   
+  print("aquí pasa 3")
   data.spain.menos <- spain_covid[-c(1:20),]
   row.names(data.spain.menos) <- NULL
   
@@ -67,6 +70,7 @@ if(!is.null(pdf_file)){
   spain_covid[-c(1:20),]$FallecidosDiarios <- data.spain.menos$Fallecidos - spain_covid[-c((nrow(spain_covid)-19):nrow(spain_covid)),]$Fallecidos
   
   write_csv(spain_covid, "data/spain_covid_dataset.csv")
+  print("aquí pasa 4")
 }
                                                                 
 
