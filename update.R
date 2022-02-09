@@ -32,8 +32,8 @@ if(!is.null(pdf_file)){
   names(datos_comunidades) <- c("Comunidad", "Total", "diaprevio", "casos14dias", "IA14", "casos7dias", "IA7", "Fallecidos", "ultimos7", "letalidad")
   print(nrow(datos_comunidades))
                                         
-  datos_comunidades <- datos_comunidades %>% select(Comunidad, Total, IA14, Fecha, Fallecidos)                               
-  names(datos_comunidades) <- c("Comunidad", "Casos", "IA14", "Fecha", "Fallecidos")
+  datos_comunidades <- datos_comunidades %>% select(Comunidad, Total, IA14, Fallecidos)                               
+  names(datos_comunidades) <- c("Comunidad", "Casos", "IA14", "Fallecidos")
   print(nrow(datos_comunidades))
                                         
   datos_comunidades <- data.frame(lapply(datos_comunidades, as.character), stringsAsFactors=FALSE)
