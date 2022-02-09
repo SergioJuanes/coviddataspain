@@ -17,7 +17,6 @@ if(!is.null(pdf_file)){
   datos_unlist <- data.frame(str_split_fixed(str_trim(datos_unlist), "\\s{2,}", 10))
   datos_comunidades <- data.frame(apply(datos_unlist, 2, function(x) gsub("^$", NA, trimws(x))))
   datos_comunidades <- datos_comunidades %>% filter(complete.cases(datos_comunidades))
-  print(datos_comunidades)
   fecha <- as.Date(format(parsedate::parse_date(datos_unlist[[1]][5]), "%Y-%m-%d"))
   if (is.na(fecha)) {
     fecha <- as.Date(format(parsedate::parse_date(datos_unlist[[1]][6]), "%Y-%m-%d"))
@@ -30,16 +29,19 @@ if(!is.null(pdf_file)){
       fecha = fecha + 1
     #}
   }
-  print(datos_comunidades)
   names(datos_comunidades) <- c("Comunidad", "Total", "diaprevio", "casos14dias", "IA14", "casos7dias", "IA7", "Fallecidos", "ultimos7", "letalidad")
-  print(datos_comunidades)
+  print(nrow(datos_comunidades))
+                                        
+  datos_comunidades <- datos_comunidades %>% select(Comunidad, Total, IA14, Fecha, Fallecidos)                               
+  names(datos_comunidades) <- c("Comunidad", "Casos", "IA14", "Fecha", "Fallecidos")
+  print(nrow(datos_comunidades))
+                                        
   datos_comunidades <- data.frame(lapply(datos_comunidades, as.character), stringsAsFactors=FALSE)
   datos_comunidades$Fecha <- fecha
   
   datos_comunidades$Comunidad <- c("Andalucía", "Aragón", "Principado de Asturias", "Islas Baleares", "Islas Canarias", "Cantabria", "Castilla-La Mancha", "Castilla y León", "Cataluña", "Ceuta", "Comunidad Valenciana", "Extremadura", "Galicia", "Comunidad de Madrid", "Melilla", "Región de Murcia", "Comunidad Foral de Navarra", "País Vasco", "La Rioja", "España")
   
-  datos_comunidades <- datos_comunidades %>% select(Comunidad, Total, IA14, Fecha, Fallecidos)
-  names(datos_comunidades) <- c("Comunidad", "Casos", "IA14", "Fecha", "Fallecidos")
+
   spain_covid_nuevos <- datos_comunidades
   
   
